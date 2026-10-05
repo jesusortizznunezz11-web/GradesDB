@@ -33,7 +33,7 @@ CREATE TABLE students (
     access_method VARCHAR(20) NOT NULL,
     PRIMARY KEY (student_id),
     FOREIGN KEY (student_id) REFERENCES people(person_id)
-)[cite: 12];
+);
 
 -- 2. GRADOS (Padre independiente)
 CREATE TABLE degrees (
@@ -41,7 +41,7 @@ CREATE TABLE degrees (
     degree_name VARCHAR(80) NOT NULL,
     duration_years TINYINT NOT NULL,
     PRIMARY KEY (degree_id)
-)[cite: 13];
+);
 
 -- 3. ASIGNATURAS (Hija de degrees)
 CREATE TABLE subjects (
@@ -54,7 +54,7 @@ CREATE TABLE subjects (
     subject_type VARCHAR(30) NOT NULL,
     PRIMARY KEY (subject_id),
     FOREIGN KEY (degree_id) REFERENCES degrees(degree_id)
-)[cite: 13];
+);
 
 -- 4. GRUPOS (Hija de subjects)
 CREATE TABLE groups (
@@ -65,7 +65,7 @@ CREATE TABLE groups (
     academic_year YEAR NOT NULL,
     PRIMARY KEY (group_id),
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
-)[cite: 14];
+);
 
 -- 5. GRUPOS_ALUMNOS (Hija de students y groups)
 CREATE TABLE group_enrollments (
@@ -74,7 +74,7 @@ CREATE TABLE group_enrollments (
     PRIMARY KEY (student_id, group_id),
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (group_id) REFERENCES groups(group_id)
-)[cite: 14];
+);
 
 -- 6. NOTAS (Hija de students y groups)
 CREATE TABLE grades (
@@ -87,7 +87,7 @@ CREATE TABLE grades (
     PRIMARY KEY (grade_id),
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (group_id) REFERENCES groups(group_id)
-)[cite: 15];
+);
 
 -- 7. MATRICULAS (Hija de students y subjects)
 CREATE TABLE subject_enrollments (
@@ -96,7 +96,7 @@ CREATE TABLE subject_enrollments (
     PRIMARY KEY (student_id, subject_id),
     FOREIGN KEY (student_id) REFERENCES students(student_id),
     FOREIGN KEY (subject_id) REFERENCES subjects(subject_id)
-)[cite: 16];
+);
 
 -- 8. CARGAS DOCENTES (Hija de professors y groups)
 CREATE TABLE teaching_loads (
@@ -106,7 +106,7 @@ CREATE TABLE teaching_loads (
     PRIMARY KEY (professor_id, group_id),
     FOREIGN KEY (professor_id) REFERENCES professors(professor_id),
     FOREIGN KEY (group_id) REFERENCES groups(group_id)
-)[cite: 17];
+);
 
 
 ALTER TABLE people
