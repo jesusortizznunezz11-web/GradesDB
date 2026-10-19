@@ -99,4 +99,17 @@ FROM students st
 JOIN people p ON st.student_id = p.person_id;
 
 
+-- 7º consulta 
+SELECT AVG(g.grade_value) AS average_grade
+FROM grades g
+WHERE g.group_id = 1;
+
+
+-- 8º consulta
+SELECT SUM(s.credits) AS total_credits
+FROM subjects s 
+WHERE s.degree_id = 3;
+
+
+
 
