@@ -5,6 +5,19 @@ DELETE FROM people;
 DELETE FROM professors;
 SET FOREIGN_KEY_CHECKS = 1;
 
+
+SET FOREIGN_KEY_CHECKS = 0;
+DELETE FROM people;
+DELETE FROM professors;
+DELETE FROM students;
+DELETE FROM degrees;
+DELETE FROM subjects;
+DELETE FROM groups;
+DELETE FROM group_enrollments;
+DELETE FROM grades;
+DELETE FROM subject_enrollments;
+DELETE FROM teaching_loads;
+SET FOREIGN_KEY_CHECKS = 1;
 	
 INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),
