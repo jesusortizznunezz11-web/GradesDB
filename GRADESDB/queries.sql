@@ -81,7 +81,7 @@ SELECT
     p.age,
     p.email
 FROM students st
-JOIN people p ON st.student_id = p.person_id;
+JOIN people p ON st.student_id = p.person_id;grades
 
 
 
