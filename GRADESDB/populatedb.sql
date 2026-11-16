@@ -96,7 +96,7 @@ INSERT INTO groups (group_id, subject_id, group_name, activity, academic_year) V
 (3, 11, 'L2', 'Laboratorio', 2024);
 
 -- 6. DATOS DE MATRICULAS (ASIGNATURAS_ALUMNOS)
-INSERT INTO subject_enrollments (student_id, subject_id) VALUES
+INSERT INTO students_subjects (student_id, subject_id) VALUES
 (6, 11), (7, 11), (8, 11), (9, 11), (10, 11), (11, 11), (12, 11), (13, 11), (14, 11), (15, 11),
 (16, 11), (17, 11), (18, 11), (19, 11), (20, 11), (21, 11), (22, 11), (23, 11), (24, 11), (25, 11);
 
