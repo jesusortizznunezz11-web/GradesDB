@@ -1,23 +1,22 @@
 
 
-SET FOREIGN_KEY_CHECKS = 0;
-DELETE FROM people;
-DELETE FROM professors;
-SET FOREIGN_KEY_CHECKS = 1;
+USE grades;
 
-
-SET FOREIGN_KEY_CHECKS = 0;
-DELETE FROM people;
-DELETE FROM professors;
-DELETE FROM students;
-DELETE FROM degrees;
-DELETE FROM subjects;
-DELETE FROM groups;
-DELETE FROM group_enrollments;
-DELETE FROM grades;
-DELETE FROM subject_enrollments;
-DELETE FROM teaching_loads;
-SET FOREIGN_KEY_CHECKS = 1;
+DELIMITER //
+CREATE OR REPLACE PROCEDURE p_populate()
+BEGIN
+    SET FOREIGN_KEY_CHECKS = 0;
+    DELETE FROM grades;
+    DELETE FROM teaching_loads;
+    DELETE FROM students_groups;
+    DELETE FROM students_subjects;
+    DELETE FROM groups;
+    DELETE FROM subjects;
+    DELETE FROM degrees;
+    DELETE FROM students;
+    DELETE FROM professors;
+    DELETE FROM people;
+    SET FOREIGN_KEY_CHECKS = 1;
 	
 INSERT INTO people (person_id, dni, first_name, last_name, age, email) VALUES
     (1, '00000001A', 'David', 'Ruiz', 50, 'druiz@us.es'),
@@ -96,16 +95,18 @@ INSERT INTO groups (group_id, subject_id, group_name, activity, academic_year) V
 (2, 11, 'L1', 'Laboratorio', 2024),
 (3, 11, 'L2', 'Laboratorio', 2024);
 
--- 5. DATOS DE GRUPO_ALUMNO
-INSERT INTO group_enrollments (student_id, group_id) VALUES
-(6, 1), (7, 1), (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (13, 1), (14, 1), (15, 1), (16, 1), (17, 1), (18, 1), (19, 1), (20, 1), (21, 1), (22, 1), (23, 1), (24, 1), (25, 1),
-(6, 2), (7, 2), (8, 2), (9, 2), (10, 2), (11, 2), (12, 2), (13, 2), (14, 2), (15, 2),
-(16, 3), (17, 3), (18, 3), (19, 3), (20, 3), (21, 3), (22, 3), (23, 3), (24, 3), (25, 3);
-
 -- 6. DATOS DE MATRICULAS (ASIGNATURAS_ALUMNOS)
 INSERT INTO subject_enrollments (student_id, subject_id) VALUES
 (6, 11), (7, 11), (8, 11), (9, 11), (10, 11), (11, 11), (12, 11), (13, 11), (14, 11), (15, 11),
 (16, 11), (17, 11), (18, 11), (19, 11), (20, 11), (21, 11), (22, 11), (23, 11), (24, 11), (25, 11);
+
+
+-- 5. DATOS DE GRUPO_ALUMNO
+INSERT INTO students_groups (student_id, group_id) VALUES
+(6, 1), (7, 1), (8, 1), (9, 1), (10, 1), (11, 1), (12, 1), (13, 1), (14, 1), (15, 1), (16, 1), (17, 1), (18, 1), (19, 1), (20, 1), (21, 1), (22, 1), (23, 1), (24, 1), (25, 1),
+(6, 2), (7, 2), (8, 2), (9, 2), (10, 2), (11, 2), (12, 2), (13, 2), (14, 2), (15, 2),
+(16, 3), (17, 3), (18, 3), (19, 3), (20, 3), (21, 3), (22, 3), (23, 3), (24, 3), (25, 3);
+
 
 -- 7. DATOS DE CARGAS DOCENTES
 INSERT INTO teaching_loads (professor_id, group_id, credits) VALUES
@@ -120,3 +121,8 @@ INSERT INTO grades (grade_id, student_id, group_id, grade_value, exam_call, with
 (21, 16, 1, 6.2, 'Segunda', 0), (22, 17, 1, 5.8, 'Segunda', 0), (23, 18, 1, 6.4, 'Segunda', 0), (24, 19, 1, 5.9, 'Segunda', 0), (25, 20, 1, 6.1, 'Segunda', 0),
 (26, 21, 1, 4.6, 'Segunda', 0), (27, 22, 1, 4.9, 'Segunda', 0), (28, 23, 1, 4.7, 'Segunda', 0), (29, 24, 1, 4.4, 'Segunda', 0), (30, 25, 1, 4.3, 'Segunda', 0),
 (31, 21, 1, 5.6, 'Tercera', 0), (32, 22, 1, 5.9, 'Tercera', 0), (33, 23, 1, 5.5, 'Tercera', 0), (34, 24, 1, 6.0, 'Tercera', 0), (35, 25, 1, 5.7, 'Tercera', 0);
+
+END //
+DELIMITER ;
+
+CALL p_populate();
