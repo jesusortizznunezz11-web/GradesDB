@@ -102,4 +102,4 @@ BEGIN
 END //
 DELIMITER ;
 
-CALL p_run_tests();
+CALL p_run_tests();	
